@@ -2,9 +2,11 @@ from crewai import Task
 from datetime import datetime
 
 
-class Productanalysistask():
-    def market_research_analyst(self,agent,product_name):
-        current_date = datetime.now().strftime("%b %Y")  # This will output format like "Dec 2024"
+class Productanalysistask:
+    def market_research_analyst(self, agent, product_name):
+        current_date = datetime.now().strftime(
+            "%b %Y"
+        )  # This will output format like "Dec 2024"
         return Task(
             description=f"""
 Analyze the market demand for {product_name}. Current month is {current_date}.
@@ -30,7 +32,9 @@ Analyze the market demand for {product_name}. Current month is {current_date}.
         )
 
     def business_consultant(self, agent, product_name):
-        current_date = datetime.now().strftime("%b %Y")  # This will output format like "Dec 2024"
+        current_date = datetime.now().strftime(
+            "%b %Y"
+        )  # This will output format like "Dec 2024"
 
         return Task(
             description=f"""

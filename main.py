@@ -21,33 +21,22 @@ def analyze_product(product_name):
 
     # Create individual tasks
     market_research_task = tasks.market_research_analyst(
-        agent=market_analyst,
-        product_name=product_name
+        agent=market_analyst, product_name=product_name
     )
 
     tech_assessment_task = tasks.technology_expert(
-        agent=tech_expert,
-        product_name=product_name
+        agent=tech_expert, product_name=product_name
     )
 
     business_analysis_task = tasks.business_consultant(
-        agent=business_consultant,
-        product_name=product_name
+        agent=business_consultant, product_name=product_name
     )
 
     # Setup Crew
     crew = Crew(
-        agents=[
-            market_analyst,
-            tech_expert,
-            business_consultant
-        ],
-        tasks=[
-            market_research_task,
-            tech_assessment_task,
-            business_analysis_task
-        ],
-        max_rpm=29
+        agents=[market_analyst, tech_expert, business_consultant],
+        tasks=[market_research_task, tech_assessment_task, business_analysis_task],
+        max_rpm=29,
     )
 
     # Kick off the crew
@@ -59,11 +48,11 @@ def extract_report_content(result):
     """Extract the actual report content from various result formats."""
     if isinstance(result, tuple):
         report_type, content = result
-        if report_type == 'raw' and content:
+        if report_type == "raw" and content:
             return content
-    elif isinstance(result, dict) and result.get('raw'):
-        return result['raw']
-    elif hasattr(result, 'raw') and result.raw:
+    elif isinstance(result, dict) and result.get("raw"):
+        return result["raw"]
+    elif hasattr(result, "raw") and result.raw:
         return result.raw
     return None
 
@@ -77,14 +66,23 @@ def display_results(results):
             # Create an expander for each report
             with st.expander(f"Report {i}", expanded=True):
                 # Split the report into sections based on headers
-                sections = content.split('\n\n')
+                sections = content.split("\n\n")
 
                 for section in sections:
                     if section.strip():
                         # Check if it's a header (starts with common header indicators)
-                        if section.strip().startswith(('Executive Summary', 'Market Analysis', 'Customer Profile',
-                                                       'Revenue Streams', 'Scalability', 'Business Plan', 'Goals',
-                                                       'Timeline')):
+                        if section.strip().startswith(
+                            (
+                                "Executive Summary",
+                                "Market Analysis",
+                                "Customer Profile",
+                                "Revenue Streams",
+                                "Scalability",
+                                "Business Plan",
+                                "Goals",
+                                "Timeline",
+                            )
+                        ):
                             st.markdown(f"### {section.strip()}")
                             st.markdown("---")
                         else:
@@ -95,7 +93,8 @@ def main():
     st.title("Product Analysis Dashboard")
 
     # Custom CSS to improve readability
-    st.markdown("""
+    st.markdown(
+        """
         <style>
         .reportview-container {
             max-width: 1200px;
@@ -117,7 +116,9 @@ def main():
             line-height: 1.6;
         }
         </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Input section
     product_name = st.text_input("Enter the product name you want to analyze:", "")
@@ -128,7 +129,9 @@ def main():
         else:
             # Create a placeholder for the loading message
             loading_placeholder = st.empty()
-            loading_placeholder.info(f"Starting analysis for '{product_name}'... Please wait.")
+            loading_placeholder.info(
+                f"Starting analysis for '{product_name}'... Please wait."
+            )
 
             try:
                 with st.spinner("Analyzing product... This may take a few moments."):

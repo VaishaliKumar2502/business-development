@@ -75,7 +75,7 @@ Businessdevelopment/
 
 4. **Configure environment variables**
     
-   Create a `.env` file in the root directory:
+   Create a `.env` file in the root directory 
    ```
    OPENAI_API_KEY=your_openai_api_key
    SERPER_API_KEY=your_serper_api_key

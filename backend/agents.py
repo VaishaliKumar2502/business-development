@@ -5,11 +5,13 @@ from crewai_tools import SerperDevTool
 search_tool = SerperDevTool()
 
 
-class ProductAnalysisAgents():
+class ProductAnalysisAgents:
     def __init__(self):
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
-            raise ValueError("OPENAI_API_KEY is missing. Add it to your .env file before running the app.")
+            raise ValueError(
+                "OPENAI_API_KEY is missing. Add it to your .env file before running the app."
+            )
 
         self.llm = LLM(
             model="gpt-4o-mini",
